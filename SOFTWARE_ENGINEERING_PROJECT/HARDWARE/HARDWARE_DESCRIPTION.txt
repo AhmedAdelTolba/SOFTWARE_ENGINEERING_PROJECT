@@ -1,0 +1,2 @@
+This folder contains any documentation related to hardware.
+for example :this folder will contain PCB design and the simulation kit of the project. 
