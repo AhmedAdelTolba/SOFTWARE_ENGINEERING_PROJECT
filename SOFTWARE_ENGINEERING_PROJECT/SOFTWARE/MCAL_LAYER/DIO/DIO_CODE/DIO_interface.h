@@ -43,20 +43,24 @@
 #define DIO_u8PIN29 29
 #define DIO_u8PIN30 30
 #define DIO_u8PIN31 31
+/*******************************************/
 
 /*comment!:PORT index values*/
 #define DIO_u8PORT0  0
 #define DIO_u8PORT1  1
 #define DIO_u8PORT2  2
 #define DIO_u8PORT3  3
+/***************************/
 
 /*comment!:Digital I/O value */
 #define DIO_u8HIGH   1
 #define DIO_u8LOW   0
+/****************************/
 
 /*comment!:Digital I/O Direction */
 #define DIO_u8INPUT   0
 #define DIO_u8OUTPUT  1
+/*********************************/
 
 
 
@@ -70,25 +74,25 @@ extern u8 DIO_u8ReadPinVal(u8 copy_ChIdx,u8* copy_u8ptrToVal);
 extern u8 DIO_u8WritePinVal(u8 copy_u8ChIdx,u8 copy_u8PinVal);
 
 /*comment!:read port value*/
-extern u8 DIO_u8ReadPortVal(u8 copy_u8PortIdx,u8* copy_u8ptrToVal);//ok
+extern u8 DIO_u8ReadPortVal(u8 copy_u8PortIdx,u8* copy_u8ptrToVal);
 
 /*comment!:write port value*/
-extern u8 DIO_u8WritePortVal(u8 copy_u8PortIdx,u8 copy_u8PortVal);//ok
+extern u8 DIO_u8WritePortVal(u8 copy_u8PortIdx,u8 copy_u8PortVal);
 
 /*comment!:write pin direction*/
 extern u8 DIO_u8WritePinDir(u8 copy_u8PinIdx,u8 copy_u8PinDir);
 
 /*comment!:write port direction*/
-extern u8 DIO_u8WritePortDir(u8 copy_u8PortIdx,u8 copy_u8PortDir);//ok
+extern u8 DIO_u8WritePortDir(u8 copy_u8PortIdx,u8 copy_u8PortDir);
 
 /*comment!:read pin direction*/
 extern u8 DIO_u8ReadPinDir(u8 copy_u8PinIdx,u8* copy_u8PtrToDir);
 
 /*comment!:read port direction*/
-extern u8 DIO_u8ReadPortDir(u8 copy_u8PortIdx,u8* copy_u8PtrToDir);//ok
+extern u8 DIO_u8ReadPortDir(u8 copy_u8PortIdx,u8* copy_u8PtrToDir);
 
 /*comment!:intialize function*/
-extern void DIO_VoidInit(void);//ok
+extern void DIO_VoidInit(void);
 #endif /*DIO_INTERFACE_H_*/
-
+/*************************************************************************/
 
