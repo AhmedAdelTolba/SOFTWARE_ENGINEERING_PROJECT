@@ -27,6 +27,10 @@
 #define CLR_DISP			0x01 //also clears DDRAM
 #define LCD_SET_CURS		0x80 //set cursor position
 
+/* Comment!: LCD LINES */
+#define LCD_u8LINE1		0x80
+#define LCD_u8LINE2		0x0c
+
 /* Comment!: LCD displaying locations */
 #define LCD_u8LINE1_LOC0		0x80 // line 1 character 0
 #define LCD_u8LINE1_LOC1		0x81 // line 1 character 1
