@@ -65,6 +65,7 @@ extern u8 TACTILE_u8GetState(u8 Copy_u8SwitchNumber, u8* Copy_u8PtrToVal) {
 	case TACTILE_u8SWITCHSTATERELEASED:
 		TACTILE_u8ReturnVal[Copy_u8SwitchNumber] =
 				TACTILE_u8SWITCHRELEASED;
+		*Copy_u8PtrToVal=TACTILE_u8ReturnVal[Copy_u8SwitchNumber];
 		DIO_u8ReadPinVal(TACTILE_u8SwitchPin[Copy_u8SwitchNumber],
 				&copy_u8SwitchVal);
 		if (copy_u8SwitchVal == TACTILE_u8SwitchType[Copy_u8SwitchNumber]) {
@@ -88,13 +89,13 @@ extern u8 TACTILE_u8GetState(u8 Copy_u8SwitchNumber, u8* Copy_u8PtrToVal) {
 			TACTILE_u8SwitchCountDown[Copy_u8SwitchNumber]++;
 		}
 
-		if (TACTILE_u8SwitchCountUp[Copy_u8SwitchNumber] == MAX_COUNT) {
+		if (TACTILE_u8SwitchCountUp[Copy_u8SwitchNumber] >= MAX_COUNT) {
 			TACTILE_u8SwitchCountUp[Copy_u8SwitchNumber] = 0;
 			TACTILE_u8SwitchCountDown[Copy_u8SwitchNumber] = 0;
 			TACTILE_u8SwitchState[Copy_u8SwitchNumber] =
 			TACTILE_u8SWITCHSTATEPRESSED;
 		}
-		if (TACTILE_u8SwitchCountDown[Copy_u8SwitchNumber] == MAX_COUNT) {
+		if (TACTILE_u8SwitchCountDown[Copy_u8SwitchNumber] >= MAX_COUNT) {
 			TACTILE_u8SwitchCountUp[Copy_u8SwitchNumber] = 0;
 			TACTILE_u8SwitchCountDown[Copy_u8SwitchNumber] = 0;
 			TACTILE_u8SwitchState[Copy_u8SwitchNumber] =
@@ -104,6 +105,7 @@ extern u8 TACTILE_u8GetState(u8 Copy_u8SwitchNumber, u8* Copy_u8PtrToVal) {
 
 	case TACTILE_u8SWITCHSTATEPRESSED:
 		TACTILE_u8ReturnVal[Copy_u8SwitchNumber] = TACTILE_u8SWITCHPRESSED;
+		*Copy_u8PtrToVal=TACTILE_u8ReturnVal[Copy_u8SwitchNumber];
 		DIO_u8ReadPinVal(TACTILE_u8SwitchPin[Copy_u8SwitchNumber],
 				&copy_u8SwitchVal);
 		if (copy_u8SwitchVal == TACTILE_u8SwitchType[Copy_u8SwitchNumber]) {
@@ -115,6 +117,7 @@ extern u8 TACTILE_u8GetState(u8 Copy_u8SwitchNumber, u8* Copy_u8PtrToVal) {
 		}
 		break;
 	}
+
 	return TACTILE_u8ReturnVal[Copy_u8SwitchNumber];
 
 }
