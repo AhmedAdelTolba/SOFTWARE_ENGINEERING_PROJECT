@@ -51,14 +51,14 @@ DIO_u8MASKCLRPIN4, DIO_u8MASKCLRPIN5, DIO_u8MASKCLRPIN6, DIO_u8MASKCLRPIN7 };
 /********************************************************************/
 
 
-/*comment!:intialize function*/
+/*comment!:initialize function*/
 /*Description:
- * this function is used to set intial values of port value and direction */
+ * this function is used to set initial values of port value and direction */
 
 /*Arguments:
  * the function take NO arguments */
 /****************************NOTE*****************************/
-/*to set those in those intial values check the DIO_config.h*/
+/*to set those in those initial values check the DIO_config.h*/
 /***********************************************************/
 extern void DIO_VoidInit(void) {
 	/*comment!:set the direction(input(0) or output(1)) of each port with the intial values of each pin  in the DIO_configration.h*/
@@ -88,7 +88,7 @@ extern void DIO_VoidInit(void) {
 
 /*Arguments:
  * the function take two arguments
- * u8 copy_u8ChIdx this is the pin that i wante to write on it
+ * u8 copy_u8ChIdx this is the pin that i want to write on it
  * u8 copy_u8PinVal this is the value of the pin high = 1 or low = 0 */
 /*Range! copy_u8ChIdx : 0-1-2-3-4-5-6-7-8-9-10-11-12-13-14-15-16-17-18-19-20-21-22-23-24-25-26-27-28-29-30-31*/
 /*Range! copy_u8PinVal:0-1*/

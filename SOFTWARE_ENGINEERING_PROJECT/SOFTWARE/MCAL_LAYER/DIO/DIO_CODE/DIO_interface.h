@@ -68,30 +68,106 @@
 /***************************public function***************************/
 /*********************************************************************/
 /*comment!:read pin value*/
+/*Description:
+ * this function is used to read pin value*/
+/*Arguments:
+ * the function take two arguments
+ * u8 copy_u8ChIdx this is the pin that i wante to write on it
+ * u8 copy_u8portVal this is the value of the pin high = 1 or low = 0 */
+/*Range! copy_u8ChIdx : 0-1-2-3-4-5-6-7-8-9-10-11-12-13-14-15-16-17-18-19-20-21-22-23-24-25-26-27-28-29-30-31*/
+/*Range! copy_u8PortVal:0-1*/
 extern u8 DIO_u8ReadPinVal(u8 copy_ChIdx,u8* copy_u8ptrToVal);
 
 /*comment!:write pin value*/
+/*Description:
+ * this function is used to set any pin to high=1 or to set it to low=0 */
+
+/*Arguments:
+ * the function take two arguments
+ * u8 copy_u8ChIdx this is the pin that i want to write on it
+ * u8 copy_u8PinVal this is the value of the pin high = 1 or low = 0 */
+/*Range! copy_u8ChIdx : 0-1-2-3-4-5-6-7-8-9-10-11-12-13-14-15-16-17-18-19-20-21-22-23-24-25-26-27-28-29-30-31*/
+/*Range! copy_u8PinVal:0-1*/
 extern u8 DIO_u8WritePinVal(u8 copy_u8ChIdx,u8 copy_u8PinVal);
 
 /*comment!:read port value*/
+/*Description:
+ * this function is used to read port value*/
+/*Arguments:
+ * the function take two arguments
+ * u8 copy_u8PortIdx this is the port that i wante to set it's direction
+ * u8* copy_u8PtrToDir this is to take any variable i wante to put in it the port direction*/
+/*Range! :copy_u8PinIdx : 0-1-2-3*/
+/*Range! :copy_u8PtrToDir:any variable*/
+
 extern u8 DIO_u8ReadPortVal(u8 copy_u8PortIdx,u8* copy_u8ptrToVal);
 
 /*comment!:write port value*/
+/*Description:
+ * this function is used to set port to high=1 or to set it to low=0 */
+/*Arguments:
+ * the function take two arguments
+ * u8 copy_u8ChIdx this is the pin that i wante to write on it
+ * u8 copy_u8portVal this is the value of the pin high = 1 or low = 0 */
+/*Range! copy_u8portIdx : 0-1-2-3*/
+/*Range! copy_u8PortVal:0-1*/
 extern u8 DIO_u8WritePortVal(u8 copy_u8PortIdx,u8 copy_u8PortVal);
 
 /*comment!:write pin direction*/
+/*Description:
+ * this function is used to set pin direction to input=0 or to output=1 */
+/*Arguments:
+ * the function take two arguments
+ * u8 copy_u8PinIdx this is the pin that i wante to set it's direction
+ * u8 copy_u8PinDir this is the value of the pin output = 1 or input = 0 */
+/*Range! :copy_u8PinIdx : 0-1-2-3-4-5-6-7-8-9-10-11-12-13-14-15-16-17-18-19-20-21-22-23-24-25-26-27-28-29-30-31-*/
+/*Range! :copy_u8PinDir:0-1*/
 extern u8 DIO_u8WritePinDir(u8 copy_u8PinIdx,u8 copy_u8PinDir);
 
+
 /*comment!:write port direction*/
+/*Description:
+ * this function is used to set port direction to input=0 or to output=1 */
+/*Arguments:
+ * the function take two arguments
+ * u8 copy_u8PortIdx this is the port that i wante to set it's direction
+ * u8 copy_u8PortDir this is the value of the port output = 1 or input = 0 */
+/*Range! :copy_u8PortIdx : 0-1-2-3*/
+/*Range! :copy_u8PortDir:0-1*/
 extern u8 DIO_u8WritePortDir(u8 copy_u8PortIdx,u8 copy_u8PortDir);
 
+
 /*comment!:read pin direction*/
+/*Description:
+ * this function is used to read pin direction */
+/*Arguments:
+ * the function take two arguments
+ * u8 copy_u8PinIdx this is the port that i wante to set it's direction
+ * u8* copy_u8PtrToDir this is to take any variable i wante to put in it the port direction*/
+/*Range! :copy_u8PinIdx : 1-2-3-4-5-6-7-8-9-10-11-12-13-14-15-16-17-18-19-20-21-22-23-24-25-26-27-28-29-30-31*/
+/*Range! :copy_u8PtrToDir:any variable*/
 extern u8 DIO_u8ReadPinDir(u8 copy_u8PinIdx,u8* copy_u8PtrToDir);
 
 /*comment!:read port direction*/
+/*Description:
+ * this function is used to read port direction */
+/*Arguments:
+ * the function take two arguments
+ * u8 copy_u8PortIdx this is the port that i wante to set it's direction
+ * u8* copy_u8PtrToDir this is to take any variable i wante to put in it the port direction*/
+/*Range! :copy_u8PortIdx : 0-1-2-3*/
+/*Range! :copy_u8PtrToDir:any variable*/
 extern u8 DIO_u8ReadPortDir(u8 copy_u8PortIdx,u8* copy_u8PtrToDir);
 
-/*comment!:intialize function*/
+/*comment!:initialize function*/
+/*Description:
+ * this function is used to set initial values of port value and direction */
+
+/*Arguments:
+ * the function take NO arguments */
+/****************************NOTE*****************************/
+/*to set those in those initial values check the DIO_config.h*/
+/***********************************************************/
 extern void DIO_VoidInit(void);
 #endif /*DIO_INTERFACE_H_*/
 /*************************************************************************/
