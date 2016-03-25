@@ -11,11 +11,11 @@
 /*comment!: PIN intial direction*/
 /*Range! : DIO_u8HIGH ~ DIO_U8OUTPUT */
 /*comment!: PIN INITDIR index values*/
-#define DIO_u8PIN0_INITDIR      DIO_u8OUTPUT
-#define DIO_u8PIN1_INITDIR      DIO_u8OUTPUT
-#define DIO_u8PIN2_INITDIR      DIO_u8OUTPUT
+#define DIO_u8PIN0_INITDIR      DIO_u8INPUT
+#define DIO_u8PIN1_INITDIR      DIO_u8INPUT
+#define DIO_u8PIN2_INITDIR      DIO_u8INPUT
 #define DIO_u8PIN3_INITDIR      DIO_u8OUTPUT
-#define DIO_u8PIN4_INITDIR      DIO_u8INPUT
+#define DIO_u8PIN4_INITDIR      DIO_u8OUTPUT
 #define DIO_u8PIN5_INITDIR      DIO_u8OUTPUT
 #define DIO_u8PIN6_INITDIR      DIO_u8OUTPUT
 #define DIO_u8PIN7_INITDIR      DIO_u8OUTPUT
@@ -40,12 +40,17 @@
 #define DIO_u8PIN26_INITDIR     DIO_u8OUTPUT
 #define DIO_u8PIN27_INITDIR     DIO_u8OUTPUT
 #define DIO_u8PIN28_INITDIR     DIO_u8OUTPUT
+
 #define DIO_u8PIN29_INITDIR     DIO_u8OUTPUT
 #define DIO_u8PIN30_INITDIR     DIO_u8OUTPUT
 #define DIO_u8PIN31_INITDIR     DIO_u8OUTPUT
-
+/*******************************************/
 /*comment!: PIN INITVALindex values*/
 /*Range! : DIO_u8HIGH ~ DIO_U8LOW */
+
+/***************************************/
+/**************PORT A******************/
+/***************************************/
 #define DIO_u8PIN0_INITVAL     DIO_u8LOW
 #define DIO_u8PIN1_INITVAL     DIO_u8LOW
 #define DIO_u8PIN2_INITVAL     DIO_u8LOW
@@ -54,7 +59,11 @@
 #define DIO_u8PIN5_INITVAL     DIO_u8LOW
 #define DIO_u8PIN6_INITVAL     DIO_u8LOW
 #define DIO_u8PIN7_INITVAL     DIO_u8LOW
+/***************************************/
 
+/***************************************/
+/**************PORT B******************/
+/***************************************/
 #define DIO_u8PIN8_INITVAL     DIO_u8LOW
 #define DIO_u8PIN9_INITVAL     DIO_u8LOW
 #define DIO_u8PIN10_INITVAL    DIO_u8LOW
@@ -63,7 +72,11 @@
 #define DIO_u8PIN13_INITVAL    DIO_u8LOW
 #define DIO_u8PIN14_INITVAL    DIO_u8LOW
 #define DIO_u8PIN15_INITVAL    DIO_u8LOW
+/***************************************/
 
+/***************************************/
+/**************PORT C******************/
+/***************************************/
 #define DIO_u8PIN16_INITVAL    DIO_u8LOW
 #define DIO_u8PIN17_INITVAL    DIO_u8LOW
 #define DIO_u8PIN18_INITVAL    DIO_u8LOW
@@ -72,7 +85,11 @@
 #define DIO_u8PIN21_INITVAL    DIO_u8LOW
 #define DIO_u8PIN22_INITVAL    DIO_u8LOW
 #define DIO_u8PIN23_INITVAL    DIO_u8LOW
+/***************************************/
 
+/***************************************/
+/**************PORT D******************/
+/***************************************/
 #define DIO_u8PIN24_INITVAL    DIO_u8LOW
 #define DIO_u8PIN25_INITVAL    DIO_u8LOW
 #define DIO_u8PIN26_INITVAL    DIO_u8LOW
@@ -81,5 +98,5 @@
 #define DIO_u8PIN29_INITVAL    DIO_u8LOW
 #define DIO_u8PIN30_INITVAL    DIO_u8LOW
 #define DIO_u8PIN31_INITVAL    DIO_u8LOW
-
+/***************************************/
 #endif /*DIO_CONFIG_H_*/
