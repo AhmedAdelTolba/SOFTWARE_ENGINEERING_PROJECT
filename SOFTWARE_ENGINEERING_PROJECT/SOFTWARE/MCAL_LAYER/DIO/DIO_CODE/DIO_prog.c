@@ -88,7 +88,7 @@ extern void DIO_VoidInit(void) {
 
 /*Arguments:
  * the function take two arguments
- * u8 copy_u8ChIdx this is the pin that i wante to write on it
+ * u8 copy_u8ChIdx this is the pin that i want to write on it
  * u8 copy_u8PinVal this is the value of the pin high = 1 or low = 0 */
 /*Range! copy_u8ChIdx : 0-1-2-3-4-5-6-7-8-9-10-11-12-13-14-15-16-17-18-19-20-21-22-23-24-25-26-27-28-29-30-31*/
 /*Range! copy_u8PinVal:0-1*/
