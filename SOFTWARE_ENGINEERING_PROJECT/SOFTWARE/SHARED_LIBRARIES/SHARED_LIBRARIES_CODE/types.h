@@ -1,6 +1,5 @@
 #ifndef Types_H
 #define _Types_H 
-#include"stdio.h"
 
 /*comment!:return */
 #define u8ok 0

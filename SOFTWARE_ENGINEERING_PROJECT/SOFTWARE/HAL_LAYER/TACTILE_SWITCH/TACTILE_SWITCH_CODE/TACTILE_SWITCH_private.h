@@ -19,5 +19,5 @@
 
 #define TACTILE_MAXSWITCH 16
 
-#define MAX_COUNT 50
+#define MAX_COUNT 2
 #endif /* TACTILE_SWITCH_PRIVATE_H_ */
