@@ -22,7 +22,6 @@ static u32 APP_u32Timer = 0;
 static u32 APP_u32StopWatch = 0;
 static u32 APP_u32Resume = 0;
 
-
 void TIMER_ISR(void)
     {
 
@@ -161,12 +160,13 @@ extern void APP_voidDisplay(u8 Copy_u8Time)
 	LCD_voidWriteChar('M');
 
 	}
-    else if (Copy_u8Time == APP_u8StopWatch){
+    else if (Copy_u8Time == APP_u8StopWatch)
+	{
 	LCD_voidWriteChar(' ');
 	LCD_voidWriteChar(' ');
 	LCD_voidWriteChar(' ');
 
-    }
+	}
     return;
     }
 
@@ -200,63 +200,27 @@ u8 APP_u8ReadSwitch(u8 Copy_u8SwitchId)
 
     u8 Local_u8Result;
 
-  //  static u8 counter;
-
-    //u8 Local_u8TempChar[10];
-    //counter++;
     TACTILE_u8GetState(Copy_u8SwitchId, &local_u8CurrentSwitchState);
 
-//    //itoa(counter , Local_u8TempChar, 10);
-//      //  LCD_voidWriteChar(Local_u8TempChar[0]);
-//    if(local_u8CurrentSwitchState==TACTILE_u8SWITCHPRESSED){
-//	LCD_voidWriteChar('p');
-//	Local_u8Result = TACTILE_u8SWITCHPRESSED;
-//    }
-//    else{
-//	Local_u8Result = TACTILE_u8SWITCHRELEASED;
-//	LCD_voidWriteChar('N');
-//
-//    }
-
-//    if ((local_u8CurrentSwitchState == TACTILE_u8SWITCHPRESSED) && (APP_u8SwitchState[Copy_u8SwitchId] ==
-//    TACTILE_u8SWITCHRELEASED))
-//	{
-//
-//	Local_u8Result = TACTILE_u8SWITCHPRESSED;
-//	LCD_voidWriteChar('p');
-//	}
-//    else
-//	{
-//
-//	Local_u8Result = TACTILE_u8SWITCHRELEASED;
-//	LCD_voidWriteChar('R');
-//
-//	}
-
     if ((local_u8CurrentSwitchState == TACTILE_u8SWITCHRELEASED) && (APP_u8SwitchState[Copy_u8SwitchId] !=
-       TACTILE_u8SWITCHRELEASED))
-   	{
+    TACTILE_u8SWITCHRELEASED))
+	{
 
-   	Local_u8Result = TACTILE_u8SWITCHPRESSED;
-   //	LCD_voidWriteChar('p');
-//while(1);
-   	}
-       else
-   	{
+	Local_u8Result = TACTILE_u8SWITCHPRESSED;
 
-   	Local_u8Result = TACTILE_u8SWITCHRELEASED;
-   	//LCD_voidWriteChar('R');
+	}
+    else
+	{
 
-   	}
+	Local_u8Result = TACTILE_u8SWITCHRELEASED;
 
+	}
 
-    APP_u8SwitchState[Copy_u8SwitchId]=local_u8CurrentSwitchState;
+    APP_u8SwitchState[Copy_u8SwitchId] = local_u8CurrentSwitchState;
 
     return Local_u8Result;
 
     }
-
-
 
 void APP_u8ResumeCounterUpdate(u8 Copy_u81MilliSecondFlag)
     {
@@ -277,38 +241,25 @@ void APP_u8ResumeCounterUpdate(u8 Copy_u81MilliSecondFlag)
 
 	}
 
-//    if (APP_u32Resume >= 180)
-//	{
-//
-//	APP_u32Resume = 0;
-//
-//	}
-
     return;
     }
-
 
 extern u32 APP_u32ReadResumeCounter(void)
 
     {
 
-
-return APP_u32Resume;
+    return APP_u32Resume;
 
     }
-
-
 
 extern void APP_voidEraseResumeCounter(void)
 
     {
 
-    APP_u32Resume=0;
-return ;
+    APP_u32Resume = 0;
+    return;
 
     }
-
-
 
 extern void APP_voidEraseStopWatchCounter(void)
 
@@ -316,6 +267,147 @@ extern void APP_voidEraseStopWatchCounter(void)
 
     APP_u32StopWatch = 0;
 
-    return ;
+    return;
 
     }
+
+extern u32 APP_u32ReadTimer(void)
+    {
+
+    return APP_u32Timer;
+    }
+
+extern void APP_voidEdittime(u32 Local_u32Timer)
+    {
+
+
+    u8 Local_u8TempChar[10];
+    u8 Local_u8Time[4];
+    u8 Local_u8Numpresses = 0;
+    u8 Local_u8SwitchResult;
+    u8 Local_u8Time_LIMITS[4]={12,60,60,1};
+
+    //Local_u8Hours
+    Local_u8Time[0] = Local_u32Timer / 3600;
+
+
+    if (Local_u8Time[0]  > 12)
+    	    {
+
+	Local_u8Time[0]  = Local_u8Time[0]  - (12 * 60 * 60UL);
+
+	Local_u8Time[3]  = APP_u8PM;
+    	    }
+    	else
+    	    {
+
+    	Local_u8Time[3]  = APP_u8AM;
+
+    	    }
+
+
+    //Local_u8Minutes
+    Local_u8Time[1] = (Local_u32Timer % 3600) / 60;
+
+    //Local_u8Seconds
+    Local_u8Time[2] = ((Local_u32Timer % 3600) % 60);
+
+
+    do
+	{
+
+	Local_u8SwitchResult = APP_u8ReadSwitch(APP_u8ModeSwitch);
+
+	if (Local_u8SwitchResult == TACTILE_u8SWITCHPRESSED)
+
+	    {
+
+	    Local_u8Numpresses++;
+
+	    }
+
+	Local_u8SwitchResult = APP_u8ReadSwitch(TACTILE_u8SWITCH2);
+	if (Local_u8SwitchResult == TACTILE_u8SWITCHPRESSED)
+
+		    {
+
+		    Local_u8Time[Local_u8Numpresses]++;
+
+		    if(Local_u8Time[Local_u8Numpresses]>Local_u8Time_LIMITS[Local_u8Numpresses])
+			{
+
+			Local_u8Time[Local_u8Numpresses]=0;
+
+			}
+		    else{
+
+			}
+
+		    }
+
+	Local_u8SwitchResult = APP_u8ReadSwitch(TACTILE_u8SWITCH3);
+	if (Local_u8SwitchResult == TACTILE_u8SWITCHPRESSED)
+	    {
+
+
+	    if(Local_u8Time[Local_u8Numpresses]>0)
+	   			{
+
+		    Local_u8Time[Local_u8Numpresses]--;
+
+	   			}
+
+	    ///////////////////////////////////
+	    }
+
+	    //write to lcd
+
+	        LCD_voidWriteCommand(LCD_u8LINE1);
+
+	        itoa( Local_u8Time[0] / 10, Local_u8TempChar, 10);
+	        LCD_voidWriteChar(Local_u8TempChar[0]);
+	        itoa(Local_u8Time[0] % 10, Local_u8TempChar, 10);
+	        LCD_voidWriteChar(Local_u8TempChar[0]);
+
+	        LCD_voidWriteChar(':');
+
+	        itoa(Local_u8Time[1] / 10, Local_u8TempChar, 10);
+	        LCD_voidWriteChar(Local_u8TempChar[0]);
+	        itoa(Local_u8Time[1] % 10, Local_u8TempChar, 10);
+	        LCD_voidWriteChar(Local_u8TempChar[0]);
+
+	        LCD_voidWriteChar(':');
+
+	        itoa(Local_u8Time[2] / 10, Local_u8TempChar, 10);
+	        LCD_voidWriteChar(Local_u8TempChar[0]);
+	        itoa(Local_u8Time[2] % 10, Local_u8TempChar, 10);
+	        LCD_voidWriteChar(Local_u8TempChar[0]);
+
+
+
+	        if (Local_u8Time[3]==APP_u8PM)
+	    	{
+	    	LCD_voidWriteChar(' ');
+	    	LCD_voidWriteChar('P');
+	    	LCD_voidWriteChar('M');
+
+	    	}
+
+	        else if (Local_u8Time[3]==APP_u8AM)
+	    	{
+	    	LCD_voidWriteChar(' ');
+	    	LCD_voidWriteChar('A');
+	    	LCD_voidWriteChar('M');
+
+	    	}
+
+
+	    //////////////////////////////////////////
+
+
+	} while (Local_u8Numpresses < 4);
+
+
+    return;
+    }
+

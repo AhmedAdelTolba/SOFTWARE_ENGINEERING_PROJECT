@@ -26,6 +26,8 @@
 
 
 
+/////////////////////
+#define APP_u8ModeSwitch TACTILE_u8SWITCH1
 
 
 
@@ -52,6 +54,9 @@ extern void APP_voidEraseResumeCounter(void);
 
 extern void APP_voidEraseStopWatchCounter(void);
 
+extern u32 APP_u32ReadTimer(void);
+
+extern void APP_voidEdittime(u32 Local_u32timer);
 
 
 

@@ -13,8 +13,8 @@
 #define APP_STOP_WATCH 2
 #define APP_STOP_WATCH_PAUSE 3
 #define APP_RESUME_STAND_BY  4
+#define APP_EDIT_TIME        5
 
-#define APP_u8ModeSwitch TACTILE_u8SWITCH1
 #define APP_u8Start_StopWatch TACTILE_u8SWITCH2
 
 #define APP_FLAGUP     1
@@ -23,11 +23,12 @@
 int main(void)
     {
 
-    u8 Local_u8State = APP_TIMER;
+    u8 Local_u8State = APP_EDIT_TIME;
     u8 Local_u81MilliSecondFlag;
     u8 Local_u8StopWatchFlag = APP_FLAGDOWN;
     u8 Local_u8SwitchResult;
     u8 Local_u8ResumeFlag = APP_FLAGDOWN;
+    u32 Local_u32timer;
 
     APP_voidInit();
 
@@ -91,7 +92,7 @@ int main(void)
 
 		{
 
-		Local_u8State = APP_TIMER; ///till now return to timer but at the future should go to edit mode
+		Local_u8State = APP_EDIT_TIME; ///till now return to timer but at the future should go to edit mode
 
 		}
 
@@ -127,11 +128,10 @@ int main(void)
 
 		{
 
-		    APP_voidEraseStopWatchCounter();//can be used to make stop watch disabled or enabled all the time
-		    Local_u8StopWatchFlag = APP_FLAGDOWN;
+		APP_voidEraseStopWatchCounter(); //can be used to make stop watch disabled or enabled all the time
+		Local_u8StopWatchFlag = APP_FLAGDOWN;
 
-
-		Local_u8State = APP_TIMER; ///till now return to timer but at the future should go to edit mode
+		Local_u8State = APP_EDIT_TIME; ///till now return to timer but at the future should go to edit mode
 
 		}
 	    else
@@ -165,10 +165,10 @@ int main(void)
 
 		{
 
-		Local_u8State = APP_TIMER; ///till now return to timer but at the future should go to edit mode
+		Local_u8State = APP_EDIT_TIME; ///till now return to timer but at the future should go to edit mode
 
-		APP_voidEraseStopWatchCounter();//can be used to make stop watch disabled or enabled all the time
-				    Local_u8StopWatchFlag = APP_FLAGDOWN;
+		APP_voidEraseStopWatchCounter(); //can be used to make stop watch disabled or enabled all the time
+		Local_u8StopWatchFlag = APP_FLAGDOWN;
 		}
 	    else
 		{
@@ -202,13 +202,14 @@ int main(void)
 
 		Local_u8ResumeFlag = APP_FLAGDOWN;
 
-		if( APP_u32ReadResumeCounter()>3UL) //more than 3 seconds
+		if (APP_u32ReadResumeCounter() > 3UL) //more than 3 seconds
 		    {
 		    Local_u8State = APP_STOP_WATCH;
 		    APP_voidEraseResumeCounter();
 
 		    }
-		else{
+		else
+		    {
 		    Local_u8State = APP_STOP_WATCH;
 
 		    APP_voidEraseStopWatchCounter();
@@ -217,12 +218,23 @@ int main(void)
 
 		    }
 
-
 		}
 	    else
 		{
 
 		}
+
+	    break;
+
+	case APP_EDIT_TIME:
+
+	    Local_u32timer=APP_u32ReadTimer();
+
+	    APP_voidEdittime(Local_u32timer);
+
+
+	    Local_u8State = APP_TIMER;
+
 
 	    break;
 
