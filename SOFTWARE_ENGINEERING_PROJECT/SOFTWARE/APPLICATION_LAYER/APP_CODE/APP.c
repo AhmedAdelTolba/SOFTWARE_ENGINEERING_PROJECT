@@ -23,7 +23,7 @@
 int main(void)
     {
 
-    u8 Local_u8State = APP_EDIT_TIME;
+    u8 Local_u8State = APP_TIMER;
     u8 Local_u81MilliSecondFlag;
     u8 Local_u8StopWatchFlag = APP_FLAGDOWN;
     u8 Local_u8SwitchResult;

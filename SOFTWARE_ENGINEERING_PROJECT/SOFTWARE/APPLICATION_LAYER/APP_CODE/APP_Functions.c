@@ -285,8 +285,9 @@ extern void APP_voidEdittime(u32 Local_u32Timer)
     u8 Local_u8Time[4];
     u8 Local_u8Numpresses = 0;
     u8 Local_u8SwitchResult;
-    u8 Local_u8Time_LIMITS[4]={12,60,60,1};
+    u8 Local_u8Time_LIMITS[4]={12,59,59,1};
 
+    u8 Local_u81MilliSecondFlag;
     //Local_u8Hours
     Local_u8Time[0] = Local_u32Timer / 3600;
 
@@ -316,6 +317,19 @@ extern void APP_voidEdittime(u32 Local_u32Timer)
     do
 	{
 
+
+	////////////////// keep updating time
+
+
+	Local_u81MilliSecondFlag = APP_u8CheckFlag();
+
+		APP_u8TimeUpdate(Local_u81MilliSecondFlag);
+
+
+
+
+
+	//////////
 	Local_u8SwitchResult = APP_u8ReadSwitch(APP_u8ModeSwitch);
 
 	if (Local_u8SwitchResult == TACTILE_u8SWITCHPRESSED)
@@ -356,6 +370,9 @@ extern void APP_voidEdittime(u32 Local_u32Timer)
 		    Local_u8Time[Local_u8Numpresses]--;
 
 	   			}
+	    else{
+		Local_u8Time[Local_u8Numpresses]=Local_u8Time_LIMITS[Local_u8Numpresses];
+	    }
 
 	    ///////////////////////////////////
 	    }
