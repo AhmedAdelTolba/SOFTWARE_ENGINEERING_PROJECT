@@ -779,7 +779,18 @@ extern void APP_voidChangeTime(u8* Copy_u8Time, u8 Copy_u8Index, u8 Copy_u8State
 
 	    if (Copy_u8Time[Copy_u8Index] > Local_u8Time_LIMITS[Copy_u8Index])
 		{
-		Copy_u8Time[Copy_u8Index] = 0;
+
+		if (Copy_u8Index != APP_HOURS)
+		    {
+
+		    Copy_u8Time[Copy_u8Index] = 0;
+
+		    }
+		else
+		    {
+		    Copy_u8Time[Copy_u8Index] = 1;
+		    }
+
 		}
 	    else
 		{
@@ -796,6 +807,15 @@ extern void APP_voidChangeTime(u8* Copy_u8Time, u8 Copy_u8Index, u8 Copy_u8State
 	    else
 		{
 		Copy_u8Time[Copy_u8Index] = Local_u8Time_LIMITS[Copy_u8Index];
+		}
+
+	    if (Copy_u8Time[Copy_u8Index] == 0 && Copy_u8Index == APP_HOURS)
+		{
+		Copy_u8Time[Copy_u8Index] = Local_u8Time_LIMITS[Copy_u8Index];
+
+		}
+	    else
+		{
 		}
 
 	    }
