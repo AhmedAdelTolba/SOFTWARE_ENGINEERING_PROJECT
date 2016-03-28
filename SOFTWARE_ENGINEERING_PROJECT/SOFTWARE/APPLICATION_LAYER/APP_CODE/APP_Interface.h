@@ -27,11 +27,17 @@
 //
 //
 ///////////////////////
-
+#define APP_TIMER              0
 
 #define APP_STOP_WATCH_STANDBY 1
 
-//
+#define APP_STOP_WATCH         2
+
+#define APP_EDIT_TIME          3
+
+#define APP_STOP_WATCH_PAUSE   4
+
+#define APP_RESUME_STAND_BY   5
 //
 //
 //
@@ -39,6 +45,17 @@
 extern void APP_voidInit(void);
 
 extern u8 APP_u8Timer(void);
+
+extern u8 APP_u8APP_STOP_WATCH_STANDBY(void);
+
+extern u8 APP_u8APP_STOP_WATCH(void);
+
+extern u8 APP_u8APP_STOP_WATCH_PAUSE(void);
+
+extern u8 APP_u8APP_RESUME_STAND_BY(void);
+
+
+
 //
 //extern u8 APP_u8CheckFlag (void);
 //
