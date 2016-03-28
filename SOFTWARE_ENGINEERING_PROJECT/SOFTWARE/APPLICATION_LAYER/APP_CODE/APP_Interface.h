@@ -54,32 +54,6 @@ extern u8 APP_u8APP_STOP_WATCH_PAUSE(void);
 
 extern u8 APP_u8APP_RESUME_STAND_BY(void);
 
-
-
-//
-//extern u8 APP_u8CheckFlag (void);
-//
-//extern void APP_u8TimeUpdate(u8 Copy_u81MilliSecondFlag);
-//
-//extern void APP_voidDisplay(u8 Copy_u8Time);
-//
-//extern void APP_u8StopWatchUpdate(u8 Copy_u81MilliSecondFlag);
-//
-//extern u8 APP_u8ReadSwitch(u8 Copy_u8SwitchId);
-//
-//extern void APP_u8ResumeCounterUpdate(u8 Copy_u81MilliSecondFlag);
-//
-//extern u32 APP_u32ReadResumeCounter(void);
-//
-//extern void APP_voidEraseResumeCounter(void);
-//
-//extern void APP_voidEraseStopWatchCounter(void);
-//
-//extern u32 APP_u32ReadTimer(void);
-//
-//extern void APP_voidEdittime(u32 Local_u32timer);
-
-
-
+extern u8 APP_u8APP_EDIT_TIME(void);
 
 #endif /* SOFTWARE_APPLICATION_LAYER_APP_CODE_APP_INTERFACE_H_ */

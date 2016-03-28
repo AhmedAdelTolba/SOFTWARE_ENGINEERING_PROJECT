@@ -44,9 +44,11 @@ int main(void)
 	    Local_u8State = APP_u8APP_RESUME_STAND_BY();
 
 	    break;
-//
-//	case APP_EDIT_TIME:
-//
+
+	case APP_EDIT_TIME:
+
+	    Local_u8State = APP_u8APP_EDIT_TIME();
+
 //	    Local_u32timer=APP_u32ReadTimer();
 //
 //	    APP_voidEdittime(Local_u32timer);
@@ -55,7 +57,7 @@ int main(void)
 //	    Local_u8State = APP_TIMER;
 //
 //
-//	    break;
+	    break;
 
 	default:
 	    break;

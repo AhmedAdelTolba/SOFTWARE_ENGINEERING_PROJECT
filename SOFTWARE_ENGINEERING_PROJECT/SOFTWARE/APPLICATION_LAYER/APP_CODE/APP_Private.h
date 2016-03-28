@@ -32,6 +32,10 @@
 
 #define APP_u8Start_StopWatch TACTILE_u8SWITCH2
 
+#define APP_u8IncreamentSwitch TACTILE_u8SWITCH2
+
+#define APP_u8DecreamentSwitch TACTILE_u8SWITCH3
+
 
 #define APP_u8MaxSwitchTime 3UL
 
@@ -49,6 +53,7 @@ extern u8 APP_u8CheckFlag(void);
 
 extern void APP_u8StopWatchUpdate(u8 Copy_u81MilliSecondFlag);
 
+extern void APP_voidDisplayFlasher(u8*Local_u8TimeView);
 
 
 
