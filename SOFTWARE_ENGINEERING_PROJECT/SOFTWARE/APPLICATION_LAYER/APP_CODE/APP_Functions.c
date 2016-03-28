@@ -600,10 +600,6 @@ extern u8 APP_u8APP_EDIT_TIME(void)
     u8 Local_u8SwitchResult;
     u32 Local_u8TimeSnapShot;
     u8 Local_u8NumOfPresses = 0;
-    u8 Local_u8Time_LIMITS[4] =
-	{
-	12, 59, 59, 1
-	};
 
     Local_u8TimeSnapShot = APP_u32Timer;
 
@@ -621,56 +617,45 @@ extern u8 APP_u8APP_EDIT_TIME(void)
 
 	//////////////////
 
-	APP_voidDisplay(&Local_u8TimeView);
+	//APP_voidDisplay(&Local_u8TimeView);
 
-//	APP_voidDisplayFlasher(&Local_u8TimeView);
+	APP_voidDisplayFlasher(&Local_u8TimeView);
 	/////////////////////
+
 	Local_u8SwitchResult = APP_u8ReadSwitch(APP_u8ModeSwitch);
 
 	if (Local_u8SwitchResult != TACTILE_u8SWITCHPRESSED)
 
 	    {
 
-	    Local_u8SwitchResult = APP_u8ReadSwitch(APP_u8IncreamentSwitch);
+	    TACTILE_u8GetState(APP_u8IncreamentSwitch, &Local_u8SwitchResult);
 
 	    if (Local_u8SwitchResult != TACTILE_u8SWITCHPRESSED)
 		{
 		}
+
 	    else
 		{
-		Local_u8Time[Local_u8NumOfPresses]++;
 
-		if (Local_u8Time[Local_u8NumOfPresses] > Local_u8Time_LIMITS[Local_u8NumOfPresses])
-		    {
-		    Local_u8Time[Local_u8NumOfPresses] = 0;
+		App_u8TempCounterFlag = APP_FLAGUP;
 
-		    }
-		else
-		    {
-
-		    }
+		APP_voidChangeTime(Local_u8Time, Local_u8NumOfPresses, APP_u8Increament);
 
 		}
 
-	    Local_u8SwitchResult = APP_u8ReadSwitch(APP_u8DecreamentSwitch);
+	    TACTILE_u8GetState(APP_u8DecreamentSwitch, &Local_u8SwitchResult);
 
 	    if (Local_u8SwitchResult != TACTILE_u8SWITCHPRESSED)
 		{
-
 		}
+
 	    else
 		{
 
-		if (Local_u8Time[Local_u8NumOfPresses] == 0)
-		    {
-		    Local_u8Time[Local_u8NumOfPresses] = Local_u8Time_LIMITS[Local_u8NumOfPresses];
+		App_u8TempCounterFlag = APP_FLAGUP;
 
-		    }
-		else
-		    {
-		    Local_u8Time[Local_u8NumOfPresses]--;
+		APP_voidChangeTime(Local_u8Time, Local_u8NumOfPresses, APP_u8Decreament);
 
-		    }
 		}
 
 	    }
@@ -682,6 +667,8 @@ extern u8 APP_u8APP_EDIT_TIME(void)
 
 	    }
 
+	APP_voidModify_Time(Local_u8Time);
+
 	} while (Local_u8NumOfPresses < 4);
 
     return APP_TIMER;
@@ -691,7 +678,7 @@ extern u8 APP_u8APP_EDIT_TIME(void)
 extern void APP_voidDisplayFlasher(u8*Copy_u8TimeView)
     {
 
-	APP_voidDisplay(&Copy_u8TimeView);
+    APP_voidDisplay(Copy_u8TimeView);
 
 //
 //    if (APP_u81MilliCounter > 0)
@@ -706,5 +693,139 @@ extern void APP_voidDisplayFlasher(u8*Copy_u8TimeView)
 //
 //	}
 
+    return;
+    }
+
+extern void APP_voidChangeTime(u8* Copy_u8Time, u8 Copy_u8Index, u8 Copy_u8State)
+    {
+
+    u8 Local_u8SwitchResult;
+    u8 Local_u8Time_LIMITS[4] =
+	{
+	12, 59, 59, 1
+	};
+    u8 Local_SingleIncFlag = APP_FLAGUP;
+
+    do
+	{
+
+	APP_voidUpdateCounters();
+
+	APP_voidDisplayFlasher(Copy_u8Time);
+
+	TACTILE_u8GetState(Copy_u8State, &Local_u8SwitchResult);
+
+	if (APP_u32TempCounter >= 3) //more than three seconds
+	    {
+
+	    if (Copy_u8State == APP_u8Increament)
+		{
+		Copy_u8Time[Copy_u8Index]++;
+
+		if (Copy_u8Time[Copy_u8Index] > Local_u8Time_LIMITS[Copy_u8Index])
+		    {
+		    Copy_u8Time[Copy_u8Index] = 0;
+		    }
+		else
+		    {
+
+		    }
+
+		}
+	    else if (Copy_u8State == APP_u8Decreament)
+		{
+		if (Copy_u8Time[Copy_u8Index] > 0)
+		    {
+		    Copy_u8Time[Copy_u8Index]--;
+		    }
+		else
+		    {
+		    Copy_u8Time[Copy_u8Index] = Local_u8Time_LIMITS[Copy_u8Index];
+		    }
+		}
+	    else
+		{
+
+		}
+
+	    Local_SingleIncFlag = APP_FLAGDOWN;
+
+	    }
+	else
+	    {
+
+	    }
+
+	} while (Local_u8SwitchResult != TACTILE_u8SWITCHRELEASED);
+
+    if (Local_SingleIncFlag == APP_FLAGUP)
+	{
+
+	if (Copy_u8State == APP_u8Increament)
+	    {
+	    Copy_u8Time[Copy_u8Index]++;
+
+	    if (Copy_u8Time[Copy_u8Index] > Local_u8Time_LIMITS[Copy_u8Index])
+		{
+		Copy_u8Time[Copy_u8Index] = 0;
+		}
+	    else
+		{
+
+		}
+	    }
+	else if (Copy_u8State == APP_u8Decreament)
+	    {
+
+	    if (Copy_u8Time[Copy_u8Index] > 0)
+		{
+		Copy_u8Time[Copy_u8Index]--;
+		}
+	    else
+		{
+		Copy_u8Time[Copy_u8Index] = Local_u8Time_LIMITS[Copy_u8Index];
+		}
+
+	    }
+	else
+	    {
+
+	    }
+	}
+
+    else
+	{
+
+	}
+
+    APP_u32TempCounter = 0;
+
+    APP_u161MilliSecondTempCounter = 0;
+
+    App_u8TempCounterFlag = APP_FLAGDOWN;
+
+    return;
+    }
+
+
+extern void APP_voidModify_Time(u8* Local_u8Time)
+    {
+
+u32 Local_u32Timer=0;
+
+Local_u32Timer=Local_u8Time[APP_HOURS]*3600UL;
+
+Local_u32Timer+=Local_u8Time[APP_MinuteS]*60UL;
+
+Local_u32Timer+=Local_u8Time[APP_Seconds];
+
+if(Local_u8Time[APP_u8AMPMFLAG]==APP_u8PM)
+    {
+
+    Local_u32Timer+=(3600UL*12UL);
+
+    }
+
+    APP_u32Timer = Local_u32Timer;
     return;
     }
