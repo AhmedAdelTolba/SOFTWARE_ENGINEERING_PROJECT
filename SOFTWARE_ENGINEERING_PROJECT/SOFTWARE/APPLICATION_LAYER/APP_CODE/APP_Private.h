@@ -60,7 +60,7 @@ extern void APP_voidDisplayFlasher(u8*Local_u8TimeView);
 
 extern void APP_voidChangeTime(u8* Copy_u8Time,u8 Copy_u8Index,u8 Copy_u8State);
 
-extern void APP_voidModify_Time(u8* Local_u8Time);
+extern u32 APP_u32Modify_Time(u8* Local_u8Time);
 
 
 #endif /* SOFTWARE_APPLICATION_LAYER_APP_CODE_APP_PRIVATE_H_ */

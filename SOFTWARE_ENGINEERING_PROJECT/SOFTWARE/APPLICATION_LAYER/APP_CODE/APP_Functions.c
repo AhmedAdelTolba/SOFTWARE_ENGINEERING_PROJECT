@@ -598,12 +598,13 @@ extern u8 APP_u8APP_EDIT_TIME(void)
     u8 Local_u8Time[4];
     u8 Local_u8TimeView[4];
     u8 Local_u8SwitchResult;
-    u32 Local_u8TimeSnapShot;
+    u32 Local_u32TimeSnapShot;
+    u32 Local_u32Temp;
     u8 Local_u8NumOfPresses = 0;
 
-    Local_u8TimeSnapShot = APP_u32Timer;
+    Local_u32TimeSnapShot = APP_u32Timer;
 
-    APP_Convert12HoursSystem(Local_u8TimeSnapShot, &Local_u8Time);
+    APP_Convert12HoursSystem(Local_u32TimeSnapShot, &Local_u8Time);
 
     do
 	{
@@ -667,7 +668,18 @@ extern u8 APP_u8APP_EDIT_TIME(void)
 
 	    }
 
-	APP_voidModify_Time(Local_u8Time);
+	Local_u32Temp = APP_u32Modify_Time(Local_u8Time);
+
+	if (Local_u32Temp != Local_u32TimeSnapShot)
+
+	    {
+	    APP_u32Timer = Local_u32Temp;
+	    }
+
+	else
+	    {
+
+	    }
 
 	} while (Local_u8NumOfPresses < 4);
 
@@ -807,25 +819,23 @@ extern void APP_voidChangeTime(u8* Copy_u8Time, u8 Copy_u8Index, u8 Copy_u8State
     return;
     }
 
-
-extern void APP_voidModify_Time(u8* Local_u8Time)
+extern u32 APP_u32Modify_Time(u8* Local_u8Time)
     {
 
-u32 Local_u32Timer=0;
+    u32 Local_u32Timer = 0;
 
-Local_u32Timer=Local_u8Time[APP_HOURS]*3600UL;
+    Local_u32Timer = Local_u8Time[APP_HOURS] * 3600UL;
 
-Local_u32Timer+=Local_u8Time[APP_MinuteS]*60UL;
+    Local_u32Timer += Local_u8Time[APP_MinuteS] * 60UL;
 
-Local_u32Timer+=Local_u8Time[APP_Seconds];
+    Local_u32Timer += Local_u8Time[APP_Seconds];
 
-if(Local_u8Time[APP_u8AMPMFLAG]==APP_u8PM)
-    {
+    if (Local_u8Time[APP_u8AMPMFLAG] == APP_u8PM)
+	{
 
-    Local_u32Timer+=(3600UL*12UL);
+	Local_u32Timer += (3600UL * 12UL);
 
-    }
+	}
 
-    APP_u32Timer = Local_u32Timer;
-    return;
+    return Local_u32Timer;
     }
