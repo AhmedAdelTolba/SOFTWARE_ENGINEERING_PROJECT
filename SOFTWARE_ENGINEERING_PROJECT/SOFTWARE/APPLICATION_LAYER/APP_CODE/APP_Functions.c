@@ -712,6 +712,7 @@ extern void APP_voidChangeTime(u8* Copy_u8Time, u8 Copy_u8Index, u8 Copy_u8State
     {
 
     u8 Local_u8SwitchResult;
+    u8 Local_u8Counter = 0;
     u8 Local_u8Time_LIMITS[4] =
 	{
 	12, 59, 59, 1
@@ -730,13 +731,29 @@ extern void APP_voidChangeTime(u8* Copy_u8Time, u8 Copy_u8Index, u8 Copy_u8State
 	if (APP_u32TempCounter >= 3) //more than three seconds
 	    {
 
-	    if (Copy_u8State == APP_u8Increament)
+	    Local_u8Counter++;
+
+	    if (Copy_u8State == APP_u8Increament && Local_u8Counter == 30)
 		{
+
+		Local_u8Counter = 0;
+
 		Copy_u8Time[Copy_u8Index]++;
 
 		if (Copy_u8Time[Copy_u8Index] > Local_u8Time_LIMITS[Copy_u8Index])
 		    {
-		    Copy_u8Time[Copy_u8Index] = 0;
+
+		    if (Copy_u8Index != APP_HOURS)
+			{
+
+			Copy_u8Time[Copy_u8Index] = 0;
+
+			}
+		    else
+			{
+			Copy_u8Time[Copy_u8Index] = 1;
+			}
+
 		    }
 		else
 		    {
@@ -744,8 +761,11 @@ extern void APP_voidChangeTime(u8* Copy_u8Time, u8 Copy_u8Index, u8 Copy_u8State
 		    }
 
 		}
-	    else if (Copy_u8State == APP_u8Decreament)
+	    else if (Copy_u8State == APP_u8Decreament && Local_u8Counter == 30)
 		{
+
+		Local_u8Counter = 0;
+
 		if (Copy_u8Time[Copy_u8Index] > 0)
 		    {
 		    Copy_u8Time[Copy_u8Index]--;
@@ -754,6 +774,16 @@ extern void APP_voidChangeTime(u8* Copy_u8Time, u8 Copy_u8Index, u8 Copy_u8State
 		    {
 		    Copy_u8Time[Copy_u8Index] = Local_u8Time_LIMITS[Copy_u8Index];
 		    }
+
+		if (Copy_u8Time[Copy_u8Index] == 0 && Copy_u8Index == APP_HOURS)
+		    {
+		    Copy_u8Time[Copy_u8Index] = Local_u8Time_LIMITS[Copy_u8Index];
+
+		    }
+		else
+		    {
+		    }
+
 		}
 	    else
 		{
