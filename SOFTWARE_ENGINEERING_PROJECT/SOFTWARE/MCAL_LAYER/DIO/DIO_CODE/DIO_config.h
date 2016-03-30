@@ -8,9 +8,14 @@
 
 #ifndef _DIO_CONFIG_H_
 #define _DIO_CONFIG_H_
+
+/***************************************************************************/
 /*comment!: PIN intial direction*/
 /*Range! : DIO_u8HIGH ~ DIO_U8OUTPUT */
 /*comment!: PIN INITDIR index values*/
+/***************************************/
+/**************PORT A******************/
+/***************************************/
 #define DIO_u8PIN0_INITDIR      DIO_u8INPUT
 #define DIO_u8PIN1_INITDIR      DIO_u8INPUT
 #define DIO_u8PIN2_INITDIR      DIO_u8INPUT
@@ -19,6 +24,11 @@
 #define DIO_u8PIN5_INITDIR      DIO_u8OUTPUT
 #define DIO_u8PIN6_INITDIR      DIO_u8OUTPUT
 #define DIO_u8PIN7_INITDIR      DIO_u8OUTPUT
+/***************************************/
+
+/***************************************/
+/**************PORT B******************/
+/***************************************/
 #define DIO_u8PIN8_INITDIR      DIO_u8OUTPUT
 #define DIO_u8PIN9_INITDIR      DIO_u8OUTPUT
 #define DIO_u8PIN10_INITDIR     DIO_u8OUTPUT
@@ -27,6 +37,11 @@
 #define DIO_u8PIN13_INITDIR     DIO_u8OUTPUT
 #define DIO_u8PIN14_INITDIR     DIO_u8OUTPUT
 #define DIO_u8PIN15_INITDIR     DIO_u8OUTPUT
+/***************************************/
+
+/***************************************/
+/**************PORT C******************/
+/***************************************/
 #define DIO_u8PIN16_INITDIR     DIO_u8OUTPUT
 #define DIO_u8PIN17_INITDIR     DIO_u8OUTPUT
 #define DIO_u8PIN18_INITDIR     DIO_u8OUTPUT
@@ -35,15 +50,20 @@
 #define DIO_u8PIN21_INITDIR     DIO_u8OUTPUT
 #define DIO_u8PIN22_INITDIR     DIO_u8OUTPUT
 #define DIO_u8PIN23_INITDIR     DIO_u8OUTPUT
+/***************************************/
+
+/***************************************/
+/**************PORT D******************/
+/***************************************/
 #define DIO_u8PIN24_INITDIR     DIO_u8OUTPUT
 #define DIO_u8PIN25_INITDIR     DIO_u8OUTPUT
 #define DIO_u8PIN26_INITDIR     DIO_u8OUTPUT
 #define DIO_u8PIN27_INITDIR     DIO_u8OUTPUT
 #define DIO_u8PIN28_INITDIR     DIO_u8OUTPUT
-
 #define DIO_u8PIN29_INITDIR     DIO_u8OUTPUT
 #define DIO_u8PIN30_INITDIR     DIO_u8OUTPUT
 #define DIO_u8PIN31_INITDIR     DIO_u8OUTPUT
+
 /*******************************************/
 /*comment!: PIN INITVALindex values*/
 /*Range! : DIO_u8HIGH ~ DIO_U8LOW */
