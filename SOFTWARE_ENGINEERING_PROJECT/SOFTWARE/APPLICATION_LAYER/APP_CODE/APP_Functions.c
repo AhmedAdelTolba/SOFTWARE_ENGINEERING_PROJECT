@@ -12,6 +12,7 @@
 #include "APP_Interface.h"
 #include "APP_Private.h"
 #include <stdlib.h>
+#include<avr/interrupt.h>
 
 volatile static u8 APP_u81MilliCounter = 0;
 static u8 App_u8StopWatchFlag = APP_FLAGDOWN;
@@ -26,22 +27,26 @@ static u8 APP_u8SwitchState[3] =
     TACTILE_u8SWITCHRELEASED, TACTILE_u8SWITCHRELEASED, TACTILE_u8SWITCHRELEASED
     };
 
-//update 1ms counter
 void TIMER_ISR(void)
     {
 
+    /*Comment!: increment milliseconds counter */
     APP_u81MilliCounter++;
 
     return;
     }
 
-//initialize all modules
 void APP_voidInit(void)
     {
 
+    /*Comment!: initialize DIO  */
     DIO_VoidInit();
-    LCD_voidInit();
+
+    /*Comment!: initialize TIMER */
     TIMER_voidInit(TIMER_ISR);
+
+    /*Comment!: initialize LCD */
+    LCD_voidInit();
 
     return;
     }
@@ -52,9 +57,17 @@ extern u8 APP_u8CheckFlag(void)
 
     u8 Local_u8Result;
 
+    /*Comment!: critical section so global interrupt is disabled */
+    cli();
+
+    /*Comment!: check number of milli seconds passed since last timer interrupt */
     Local_u8Result = APP_u81MilliCounter;
 
+    /*Comment!: reset milli seconds counter*/
     APP_u81MilliCounter = 0;
+
+    /*Comment!: end of critical section so global interrupt is enabled */
+    sei();
 
     return Local_u8Result;
 
@@ -66,12 +79,19 @@ extern void APP_u8TimeUpdate(u8 Copy_u81MilliSecondFlag)
 
     static u16 Local_u161MilliSecondCounter = 0;
 
+    /*Comment!: increment Local_u161MilliSecondCounter counter */
+    /*Comment!: Local_u161MilliSecondCounter represents number of
+     * milliseconds passed since last second of timer */
     Local_u161MilliSecondCounter += Copy_u81MilliSecondFlag;
 
-    if (Local_u161MilliSecondCounter >= 1000) //default 1000
+    /*Comment!: check reaching more than or equal 1 second */
+    if (Local_u161MilliSecondCounter >= APP_u8ONESECOND)
 	{
-	Local_u161MilliSecondCounter -= 1000; //default 1000
 
+	/*Comment!: reset Local_u161MilliSecondCounter*/
+	Local_u161MilliSecondCounter -= APP_u8ONESECOND;
+
+	/*Comment!: increment number of seconds passed since clock started*/
 	APP_u32Timer++;
 
 	}
@@ -80,9 +100,11 @@ extern void APP_u8TimeUpdate(u8 Copy_u81MilliSecondFlag)
 
 	}
 
-    if (APP_u32Timer == APP_u8FULLDAY) //check reaching end of the day
+    /*Comment!: check reaching end of the day*/
+    if (APP_u32Timer == APP_u8FULLDAY)
 	{
 
+	/*Comment!: reset timer*/
 	APP_u32Timer = APP_u8INITCOUNTER;
 
 	}
@@ -93,13 +115,19 @@ extern void APP_u8TimeUpdate(u8 Copy_u81MilliSecondFlag)
 extern void APP_u8StopWatchUpdate(u8 Copy_u81MilliSecondFlag)
     {
 
+    /*Comment!: increment APP_u161MilliSecondCounterStopWatch counter */
+    /*Comment!: APP_u161MilliSecondCounterStopWatch represents number of milliseconds
+     *  passed since last second of stop watch */
     APP_u161MilliSecondCounterStopWatch += Copy_u81MilliSecondFlag;
 
-    if (APP_u161MilliSecondCounterStopWatch >= 1000) //default 1000
+    /*Comment!: check reaching more than or equal 1 second */
+    if (APP_u161MilliSecondCounterStopWatch >= APP_u8ONESECOND)
 	{
 
-	APP_u161MilliSecondCounterStopWatch -= 1000; //default 1000
+	/*Comment!: reset APP_u161MilliSecondCounterStopWatch*/
+	APP_u161MilliSecondCounterStopWatch -= APP_u8ONESECOND;
 
+	/*Comment!: increment number of seconds passed since Stop watch started*/
 	APP_u32StopWatch++;
 
 	}
@@ -108,38 +136,30 @@ extern void APP_u8StopWatchUpdate(u8 Copy_u81MilliSecondFlag)
 
 	}
 
-    if (APP_u32Timer == APP_u8FULLDAY) //check reaching end of the day
-	{
-
-	APP_u32StopWatch = 0;
-
-	}
-
     return;
     }
 
-extern void APP_u8TempCounterUpdate(u8 Copy_u81MilliSecondFlag) //////////////////////
+extern void APP_u8TempCounterUpdate(u8 Copy_u81MilliSecondFlag)
     {
 
+    /*Comment!: increment APP_u161MilliSecondTempCounter counter */
+    /*Comment!: APP_u161MilliSecondTempCounter represents number of milliseconds
+     *  passed since last second of temp counter */
     APP_u161MilliSecondTempCounter += Copy_u81MilliSecondFlag;
 
-    if (APP_u161MilliSecondTempCounter >= 1000) //default 1000
+    /*Comment!: check reaching more than or equal 1 second */
+    if (APP_u161MilliSecondTempCounter >= APP_u8ONESECOND)
 	{
 
-	APP_u161MilliSecondTempCounter -= 1000; //default 1000
+	/*Comment!: reset APP_u161MilliSecondTempCounter*/
+	APP_u161MilliSecondTempCounter -= APP_u8ONESECOND;
 
+	/*Comment!: increment number of seconds passed since Stop watch started*/
 	APP_u32TempCounter++;
 
 	}
     else
 	{
-
-	}
-
-    if (APP_u32Timer == APP_u8FULLDAY) //check reaching end of the day
-	{
-
-	APP_u32TempCounter = 0;
 
 	}
 
@@ -154,6 +174,7 @@ extern void APP_voidUpdateCounters(void)
 
     u8 Local_u81MilliSecondFlag;
 
+	/*Comment!: increment number of */
     Local_u81MilliSecondFlag = APP_u8CheckFlag();
 
     APP_u8TimeUpdate(Local_u81MilliSecondFlag);

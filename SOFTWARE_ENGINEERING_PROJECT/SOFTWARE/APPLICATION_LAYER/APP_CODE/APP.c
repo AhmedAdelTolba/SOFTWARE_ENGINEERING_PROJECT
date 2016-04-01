@@ -4,8 +4,12 @@
 int main(void)
     {
 
-    u8 Local_u8State = APP_TIMER;
+    u8 Local_u8State ;
 
+    /*Comment!: set entry point of state machine*/
+    Local_u8State = APP_TIMER;
+
+    /*Comment!: initialize application  */
     APP_voidInit();
 
     while (1)

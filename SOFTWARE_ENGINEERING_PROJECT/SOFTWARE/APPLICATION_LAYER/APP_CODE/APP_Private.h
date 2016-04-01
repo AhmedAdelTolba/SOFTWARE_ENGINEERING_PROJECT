@@ -28,6 +28,8 @@
 
 #define APP_u8INITCOUNTER 3600UL
 
+#define APP_u8ONESECOND 1000UL
+
 #define APP_u8ModeSwitch TACTILE_u8SWITCH1
 
 #define APP_u8Start_StopWatch TACTILE_u8SWITCH2
