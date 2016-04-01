@@ -16,10 +16,10 @@
 
 volatile static u8 APP_u81MilliCounter = 0;
 static u8 App_u8StopWatchFlag = APP_FLAGDOWN;
-static u8 App_u8TempCounterFlag = APP_FLAGDOWN;
+static u8 App_u8TempTimerFlag = APP_FLAGDOWN;
 static u32 APP_u32Timer = APP_u8INITCOUNTER;
-static u32 APP_u32StopWatch = 0;
-static u32 APP_u32TempCounter = 0;
+static u32 APP_u32StopWatchTimer = 0;
+static u32 APP_u32TempTimer = 0;
 static u16 APP_u161MilliSecondCounterStopWatch = 0;
 static u16 APP_u161MilliSecondTempCounter = 0;
 static u8 APP_u8SwitchState[3] =
@@ -73,7 +73,6 @@ extern u8 APP_u8CheckFlag(void)
 
     }
 
-//update timer counter
 extern void APP_u8TimeUpdate(u8 Copy_u81MilliSecondFlag)
     {
 
@@ -128,7 +127,7 @@ extern void APP_u8StopWatchUpdate(u8 Copy_u81MilliSecondFlag)
 	APP_u161MilliSecondCounterStopWatch -= APP_u8ONESECOND;
 
 	/*Comment!: increment number of seconds passed since Stop watch started*/
-	APP_u32StopWatch++;
+	APP_u32StopWatchTimer++;
 
 	}
     else
@@ -155,7 +154,7 @@ extern void APP_u8TempCounterUpdate(u8 Copy_u81MilliSecondFlag)
 	APP_u161MilliSecondTempCounter -= APP_u8ONESECOND;
 
 	/*Comment!: increment number of seconds passed since Stop watch started*/
-	APP_u32TempCounter++;
+	APP_u32TempTimer++;
 
 	}
     else
@@ -167,8 +166,7 @@ extern void APP_u8TempCounterUpdate(u8 Copy_u81MilliSecondFlag)
 
     }
 
-//update all time counters
-extern void APP_voidUpdateCounters(void)
+extern void APP_voidUpdateTimers(void)
 
     {
 
@@ -195,7 +193,7 @@ extern void APP_voidUpdateCounters(void)
 	}
 
     /*Comment!: check if temp counter should be updated*/
-    if (App_u8TempCounterFlag == APP_FLAGUP)
+    if (App_u8TempTimerFlag == APP_FLAGUP)
 	{
 
 	/*Comment!:update temp counter */
@@ -385,7 +383,7 @@ u8 APP_u8Timer(void)
 	{
 
 	/*Comment!:update system timer */
-	APP_voidUpdateCounters();
+	APP_voidUpdateTimers();
 
 	/*Comment!:convert time to 12 hours system */
 	APP_voidConvertto12HoursSystem(APP_u32Timer, &Local_u8Time);
@@ -414,7 +412,7 @@ u8 APP_u8APP_STOP_WATCH_STANDBY(void)
 	{
 
 	/*Comment!:update system counter*/
-	APP_voidUpdateCounters();
+	APP_voidUpdateTimers();
 
 	/*Comment!:convert time(0) to 12 hours system*/
 	APP_voidConvertto12HoursSystem(0, &Local_u8Time);
@@ -476,10 +474,10 @@ extern u8 APP_u8APP_STOP_WATCH(void)
 	{
 
 	/*Comment!:update system time*/
-	APP_voidUpdateCounters();
+	APP_voidUpdateTimers();
 
 	/*Comment!:convert stop watch time to 12 hours mode*/
-	APP_voidConvertto12HoursSystem(APP_u32StopWatch, &Local_u8Time);
+	APP_voidConvertto12HoursSystem(APP_u32StopWatchTimer, &Local_u8Time);
 
 	/*Comment!:write garbage to prevent writing A.M or P.M to lcd*/
 	Local_u8Time[3] = 'x';
@@ -495,7 +493,7 @@ extern u8 APP_u8APP_STOP_WATCH(void)
 	    {
 
 	    /*Comment!:reset stop watch */
-	    APP_u32StopWatch = 0;
+	    APP_u32StopWatchTimer = 0;
 
 	    /*Comment!:stop updating stop watch*/
 	    App_u8StopWatchFlag = APP_FLAGDOWN;
@@ -544,10 +542,10 @@ extern u8 APP_u8APP_STOP_WATCH_PAUSE(void)
 	{
 
 	/*Comment!:update system time*/
-	APP_voidUpdateCounters();
+	APP_voidUpdateTimers();
 
 	/*Comment!:convert to 12 hours system*/
-	APP_voidConvertto12HoursSystem(APP_u32StopWatch, &Local_u8Time);
+	APP_voidConvertto12HoursSystem(APP_u32StopWatchTimer, &Local_u8Time);
 
 	/*Comment!:write garbage to prevent writing A.M or P.M to lcd*/
 	Local_u8Time[3] = 'x';
@@ -563,7 +561,7 @@ extern u8 APP_u8APP_STOP_WATCH_PAUSE(void)
 	    {
 
 	    /*Comment!:reset stop watch counter*/
-	    APP_u32StopWatch = 0;
+	    APP_u32StopWatchTimer = 0;
 
 	    /*Comment!:change state*/
 	    Local_u8ReturnCase = APP_EDIT_TIME;
@@ -584,7 +582,7 @@ extern u8 APP_u8APP_STOP_WATCH_PAUSE(void)
 		Local_u8ReturnCase = APP_RESUME_STAND_BY;
 
 		/*Comment!:start temp counter*/
-		App_u8TempCounterFlag = APP_FLAGUP;
+		App_u8TempTimerFlag = APP_FLAGUP;
 
 		}
 	    else
@@ -611,11 +609,11 @@ extern u8 APP_u8APP_RESUME_STAND_BY(void)
 	{
 
 	/*Comment!:update system time*/
-	APP_voidUpdateCounters();
+	APP_voidUpdateTimers();
 
 	/*Comment!:convert to 12 hours mode*/
 
-	APP_voidConvertto12HoursSystem(APP_u32StopWatch, &Local_u8Time);
+	APP_voidConvertto12HoursSystem(APP_u32StopWatchTimer, &Local_u8Time);
 
 	/*Comment!:write garbage to prevent writing A.M or P.M to lcd*/
 	Local_u8Time[3] = 'x';
@@ -631,9 +629,9 @@ extern u8 APP_u8APP_RESUME_STAND_BY(void)
 	    {
 
 	    /*Comment!:Stop updating temp counter*/
-	    App_u8TempCounterFlag = APP_FLAGDOWN;
+	    App_u8TempTimerFlag = APP_FLAGDOWN;
 
-	    if (APP_u32TempCounter >= APP_u8MaxSwitchTime)
+	    if (APP_u32TempTimer >= APP_u8MaxSwitchTime)
 		{
 
 		/*Comment!:Change state*/
@@ -643,7 +641,7 @@ extern u8 APP_u8APP_RESUME_STAND_BY(void)
 		APP_u161MilliSecondTempCounter = 0;
 
 		/*Comment!:reset APP_u32TempCounter*/
-		APP_u32TempCounter = 0;
+		APP_u32TempTimer = 0;
 
 		}
 	    else
@@ -656,13 +654,13 @@ extern u8 APP_u8APP_RESUME_STAND_BY(void)
 		APP_u161MilliSecondTempCounter = 0;
 
 		/*Comment!:reset APP_u32TempCounter*/
-		APP_u32TempCounter = 0;
+		APP_u32TempTimer = 0;
 
 		/*Comment!:reset APP_u161MilliSecondCounterStopWatch*/
 		APP_u161MilliSecondCounterStopWatch = 0;
 
 		/*Comment!:reset APP_u32StopWatch*/
-		APP_u32StopWatch = 0;
+		APP_u32StopWatchTimer = 0;
 
 		}
 
@@ -700,7 +698,7 @@ extern u8 APP_u8APP_EDIT_TIME(void)
 	{
 
 	/*Comment!:update system time*/
-	APP_voidUpdateCounters();
+	APP_voidUpdateTimers();
 
 	/*Comment!:make copy of time*/
 	for (u8 Local_u8LoopCounter = 0; Local_u8LoopCounter < 4; Local_u8LoopCounter++)
@@ -729,7 +727,7 @@ extern u8 APP_u8APP_EDIT_TIME(void)
 		{
 
 		/*Comment!:start temp counter*/
-		App_u8TempCounterFlag = APP_FLAGUP;
+		App_u8TempTimerFlag = APP_FLAGUP;
 
 		/*Comment!:increment time */
 		APP_voidChangeTime(Local_u8Time, Local_u8NumOfPresses, APP_u8Increament);
@@ -747,7 +745,7 @@ extern u8 APP_u8APP_EDIT_TIME(void)
 		{
 
 		/*Comment!:start temp counter*/
-		App_u8TempCounterFlag = APP_FLAGUP;
+		App_u8TempTimerFlag = APP_FLAGUP;
 
 		/*Comment!:decrement time*/
 		APP_voidChangeTime(Local_u8Time, Local_u8NumOfPresses, APP_u8Decreament);
@@ -812,7 +810,7 @@ extern void APP_voidChangeTime(u8* Copy_u8Time, u8 Copy_u8Index, u8 Copy_u8State
 	{
 
 	/*Comment!:update system time*/
-	APP_voidUpdateCounters();
+	APP_voidUpdateTimers();
 
 	/*Comment!:write time to lcd */
 	APP_voidDisplayFlasher(Copy_u8Time);
@@ -822,7 +820,7 @@ extern void APP_voidChangeTime(u8* Copy_u8Time, u8 Copy_u8Index, u8 Copy_u8State
 	TACTILE_u8GetState(Copy_u8State, &Local_u8SwitchResult);
 
 	/*Comment!:switch is pressed more than certain time  */
-	if (APP_u32TempCounter >= APP_u8TimeOfPressingSwitch)
+	if (APP_u32TempTimer >= APP_u8TimeOfPressingSwitch)
 	    {
 
 	    /*Comment!:this counter is used to slow down changing numbers on screen */
@@ -964,11 +962,11 @@ extern void APP_voidChangeTime(u8* Copy_u8Time, u8 Copy_u8Index, u8 Copy_u8State
 
 	}
 
-    APP_u32TempCounter = 0;
+    APP_u32TempTimer = 0;
 
     APP_u161MilliSecondTempCounter = 0;
 
-    App_u8TempCounterFlag = APP_FLAGDOWN;
+    App_u8TempTimerFlag = APP_FLAGDOWN;
 
     return;
     }
@@ -976,10 +974,7 @@ extern void APP_voidChangeTime(u8* Copy_u8Time, u8 Copy_u8Index, u8 Copy_u8State
 extern u32 APP_u32Convertto24hourssystem(u8* Local_u8Time)
     {
 
-    /////////////////0
     u32 Local_u32Timer = APP_u8INITCOUNTER;
-
-
 
     Local_u32Timer = Local_u8Time[APP_HOURS] * 3600UL;
 
