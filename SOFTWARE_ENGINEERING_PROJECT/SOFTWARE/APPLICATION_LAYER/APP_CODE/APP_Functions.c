@@ -13,7 +13,7 @@
 #include "APP_Private.h"
 #include <stdlib.h>
 
-static u8 APP_u81MilliCounter = 0;
+volatile static u8 APP_u81MilliCounter = 0;
 static u8 App_u8StopWatchFlag = APP_FLAGDOWN;
 static u8 App_u8TempCounterFlag = APP_FLAGDOWN;
 static u32 APP_u32Timer = APP_u8INITCOUNTER;
