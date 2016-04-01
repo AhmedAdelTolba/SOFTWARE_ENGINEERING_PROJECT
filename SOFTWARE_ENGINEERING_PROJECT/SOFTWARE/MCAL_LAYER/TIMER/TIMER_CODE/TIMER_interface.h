@@ -12,6 +12,6 @@
 /*******************************************************/  
 /*****************  Public Functions  ******************/  
 /*******************************************************/  
-  void TIMER_voidInit( void (*x)(void));
+  void TIMER_voidInit( void (*Copy_pfcallback)(void));
 
 #endif  

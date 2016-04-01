@@ -5,23 +5,28 @@
 #include <avr/io.h>
 #include <avr/interrupt.h>
 
-void TIMER_voidInit( void (*x)(void))
+/*Comment!: pointer to call back function*/
+void (*Timer_pfcallback)(void);
+
+void TIMER_voidInit(void (*Copy_pfcallback)(void))
     {
 
-    callback=x;
-    // set up timer with no prescaler and CTC mode
+    Timer_pfcallback = Copy_pfcallback;
+
+    /*Comment!: set up timer with no prescaler and CTC mode*/
+
     TCCR1B |= (1 << WGM12) | (1 << CS10);
 
-    // initialize counter
+    /*Comment!: initialize counter*/
     TCNT1 = 0;
 
-    // initialize compare value
+    /*Comment!: set compare value*/
     OCR1A = 4000;
 
-    // enable compare interrupt
+    /*Comment!: enable compare interrupt*/
     TIMSK |= (1 << OCIE1A);
 
-    // enable global interrupts
+    /*Comment!: enable global interrupt*/
     sei();
 
     return;
@@ -29,5 +34,14 @@ void TIMER_voidInit( void (*x)(void))
 
 ISR (TIMER1_COMPA_vect)
     {
-    callback();
+
+    /*Comment!: disable global interrupt*/
+    cli();
+
+    /*Comment!: call call back function*/
+    Timer_pfcallback();
+
+    /*Comment!: enable global interrupt*/
+    sei();
+
     }
