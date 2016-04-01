@@ -979,18 +979,27 @@ extern u32 APP_u32Convertto24hourssystem(u8* Local_u8Time)
     /////////////////0
     u32 Local_u32Timer = APP_u8INITCOUNTER;
 
+
+
     Local_u32Timer = Local_u8Time[APP_HOURS] * 3600UL;
 
     Local_u32Timer += Local_u8Time[APP_MinuteS] * 60UL;
 
     Local_u32Timer += Local_u8Time[APP_Seconds];
 
-    if (Local_u8Time[APP_u8AMPMFLAG] == APP_u8PM)
+    if (Local_u8Time[APP_u8AMPMFLAG] == APP_u8PM && (Local_u8Time[APP_HOURS]!=12))
 	{
 
 	Local_u32Timer += (3600UL * 12UL);
 
 	}
+
+    if (Local_u8Time[APP_u8AMPMFLAG] == APP_u8AM && (Local_u8Time[APP_HOURS]==12))
+   	{
+
+   	Local_u32Timer += (3600UL * 12UL);
+
+   	}
 
     return Local_u32Timer;
     }
