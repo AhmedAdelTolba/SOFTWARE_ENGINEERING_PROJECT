@@ -21,15 +21,15 @@
 /*************************Global Arrays*******************************/
 /********************************************************************/
 /*comment!:Array of ports(portA,portB,portC,portD) */
-static u8* const DIO_U8ArrayOfPorts[DIO_PORTSNUMBER] = { DIO_u8PORTA, DIO_u8PORTB,
+volatile static u8* const DIO_U8ArrayOfPorts[DIO_PORTSNUMBER] = { DIO_u8PORTA, DIO_u8PORTB,
 DIO_u8PORTC, DIO_u8PORTD };
 
 /*comment!:Array to set the direction(input (0) or output(1)) of each port */
-u8* const DIO_U8ArrayOfdirection[DIO_PORTSNUMBER] = { DIO_u8DDRA, DIO_u8DDRB,
+volatile u8* const DIO_U8ArrayOfdirection[DIO_PORTSNUMBER] = { DIO_u8DDRA, DIO_u8DDRB,
 DIO_u8DDRC, DIO_u8DDRD };
 
 /*comment!:Array of pins for each port */
-u8* const DIO_U8ArrayOfPINS[DIO_PORTSNUMBER] = { DIO_u8PINA, DIO_u8PINB,
+volatile u8* const DIO_U8ArrayOfPINS[DIO_PORTSNUMBER] = { DIO_u8PINA, DIO_u8PINB,
 DIO_u8PINC, DIO_u8PIND };
 
 /*comment!:Array of mask to set the value of each pin in each port*/
