@@ -52,7 +52,7 @@
 						</toolChain>
 					</folderInfo>
 					<sourceEntries>
-						<entry excluding="SOFTWARE/HAL_LAYER/TACTILE_SWITCH/TACTILE_SWITCH_TEST/Test.c" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
+						<entry excluding="SOFTWARE/HAL_LAYER/LCD/LCD_TEST/LCD_TEST.c|SOFTWARE/HAL_LAYER/TACTILE_SWITCH/TACTILE_SWITCH_TEST/Test.c" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
 					</sourceEntries>
 				</configuration>
 			</storageModule>
@@ -109,7 +109,7 @@
 						</toolChain>
 					</folderInfo>
 					<sourceEntries>
-						<entry excluding="SOFTWARE/HAL_LAYER/TACTILE_SWITCH/TACTILE_SWITCH_TEST/Test.c" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
+						<entry excluding="SOFTWARE/HAL_LAYER/LCD/LCD_TEST/LCD_TEST.c|SOFTWARE/HAL_LAYER/TACTILE_SWITCH/TACTILE_SWITCH_TEST/Test.c" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
 					</sourceEntries>
 				</configuration>
 			</storageModule>
@@ -137,4 +137,5 @@
 			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="de.innot.avreclipse.core.AVRGCCManagedMakePerProjectProfileC"/>
 		</scannerConfigBuildInfo>
 	</storageModule>
+	<storageModule moduleId="org.eclipse.cdt.make.core.buildtargets"/>
 </cproject>
