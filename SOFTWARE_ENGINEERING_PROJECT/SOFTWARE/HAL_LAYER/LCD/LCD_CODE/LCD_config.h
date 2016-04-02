@@ -10,14 +10,14 @@
 /***************************************************************************/
 /* Comment!: Data pins*/
 /* Range!: DIO_u8PIN0 ~ DIO_u8PIN31 */
-#define LCD_u8D0	DIO_u8PIN16
-#define LCD_u8D1	DIO_u8PIN17
-#define LCD_u8D2	DIO_u8PIN18
-#define LCD_u8D3	DIO_u8PIN19
-#define LCD_u8D4	DIO_u8PIN20
-#define LCD_u8D5	DIO_u8PIN21
-#define LCD_u8D6	DIO_u8PIN22
-#define LCD_u8D7	DIO_u8PIN23
+#define LCD_u8D0	DIO_u8PIN8
+#define LCD_u8D1	DIO_u8PIN9
+#define LCD_u8D2	DIO_u8PIN10
+#define LCD_u8D3	DIO_u8PIN11
+#define LCD_u8D4	DIO_u8PIN12
+#define LCD_u8D5	DIO_u8PIN13
+#define LCD_u8D6	DIO_u8PIN14
+#define LCD_u8D7	DIO_u8PIN15
 
 /* Comment!: control pins*/
 /* Range!: DIO_u8PIN0 ~ DIO_u8PIN31 */
