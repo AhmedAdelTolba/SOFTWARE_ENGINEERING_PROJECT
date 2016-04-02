@@ -643,6 +643,11 @@ extern u8 APP_u8APP_RESUME_STAND_BY(void)
 		/*Comment!:reset APP_u32TempCounter*/
 		APP_u32TempTimer = 0;
 
+		/*Comment!:reset APP_u161MilliSecondCounterStopWatch*/
+		APP_u161MilliSecondCounterStopWatch = 0;
+
+		/*Comment!:reset APP_u32StopWatch*/
+		APP_u32StopWatchTimer = 0;
 		}
 	    else
 		{
@@ -655,12 +660,6 @@ extern u8 APP_u8APP_RESUME_STAND_BY(void)
 
 		/*Comment!:reset APP_u32TempCounter*/
 		APP_u32TempTimer = 0;
-
-		/*Comment!:reset APP_u161MilliSecondCounterStopWatch*/
-		APP_u161MilliSecondCounterStopWatch = 0;
-
-		/*Comment!:reset APP_u32StopWatch*/
-		APP_u32StopWatchTimer = 0;
 
 		}
 
@@ -836,7 +835,7 @@ extern void APP_voidChangeTime(u8* Copy_u8Time, u8 Copy_u8Index, u8 Copy_u8State
 		/*Comment!:increment time item*/
 		Copy_u8Time[Copy_u8Index]++;
 
-		    /*Comment!:check if time item exceed its limit */
+		/*Comment!:check if time item exceed its limit */
 		if (Copy_u8Time[Copy_u8Index] > Local_u8Time_LIMITS[Copy_u8Index])
 		    {
 
@@ -862,7 +861,7 @@ extern void APP_voidChangeTime(u8* Copy_u8Time, u8 Copy_u8Index, u8 Copy_u8State
 	    else if (Copy_u8State == APP_u8Decreament && Local_u8Counter == APP_u8ChangingSpeed)
 		{
 
-		    /*Comment!:reset counter */
+		/*Comment!:reset counter */
 		Local_u8Counter = 0;
 
 		if (Copy_u8Time[Copy_u8Index] > 0)
@@ -874,7 +873,7 @@ extern void APP_voidChangeTime(u8* Copy_u8Time, u8 Copy_u8Index, u8 Copy_u8State
 		    Copy_u8Time[Copy_u8Index] = Local_u8Time_LIMITS[Copy_u8Index];
 		    }
 
-		    /*Comment!:fixing a bug that hours shouldn't be zero */
+		/*Comment!:fixing a bug that hours shouldn't be zero */
 		if (Copy_u8Time[Copy_u8Index] == 0 && Copy_u8Index == APP_HOURS)
 		    {
 		    Copy_u8Time[Copy_u8Index] = Local_u8Time_LIMITS[Copy_u8Index];
@@ -982,19 +981,19 @@ extern u32 APP_u32Convertto24hourssystem(u8* Local_u8Time)
 
     Local_u32Timer += Local_u8Time[APP_Seconds];
 
-    if (Local_u8Time[APP_u8AMPMFLAG] == APP_u8PM && (Local_u8Time[APP_HOURS]!=12))
+    if (Local_u8Time[APP_u8AMPMFLAG] == APP_u8PM && (Local_u8Time[APP_HOURS] != 12))
 	{
 
 	Local_u32Timer += (3600UL * 12UL);
 
 	}
 
-    if (Local_u8Time[APP_u8AMPMFLAG] == APP_u8AM && (Local_u8Time[APP_HOURS]==12))
-   	{
+    if (Local_u8Time[APP_u8AMPMFLAG] == APP_u8AM && (Local_u8Time[APP_HOURS] == 12))
+	{
 
-   	Local_u32Timer += (3600UL * 12UL);
+	Local_u32Timer += (3600UL * 12UL);
 
-   	}
+	}
 
     return Local_u32Timer;
     }
