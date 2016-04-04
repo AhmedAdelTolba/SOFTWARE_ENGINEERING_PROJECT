@@ -51,7 +51,6 @@ void APP_voidInit(void)
     return;
     }
 
-//check 1ms counter return its value then make it equal 0
 extern u8 APP_u8CheckFlag(void)
     {
 
@@ -60,10 +59,10 @@ extern u8 APP_u8CheckFlag(void)
     /*Comment!: critical section so global interrupt is disabled */
     cli();
 
-    /*Comment!: check number of milli seconds passed since last timer interrupt */
+    /*Comment!: check number of milliseconds passed since last timer interrupt */
     Local_u8Result = APP_u81MilliCounter;
 
-    /*Comment!: reset milli seconds counter*/
+    /*Comment!: reset milliseconds counter*/
     APP_u81MilliCounter = 0;
 
     /*Comment!: end of critical section so global interrupt is enabled */
@@ -209,7 +208,6 @@ extern void APP_voidUpdateTimers(void)
 
     }
 
-//convert to 12hours system
 void APP_voidConvertto12HoursSystem(u32 Copy_APP_u32Timer, u8* Copy_Local_u8Time)
     {
 
@@ -378,6 +376,7 @@ u8 APP_u8Timer(void)
 
     u8 Local_u8Time[4];
     u8 Local_u8SwitchResult;
+    u8 Local_u8ReturnCase = APP_TIMER;
 
     do
 	{
@@ -394,10 +393,41 @@ u8 APP_u8Timer(void)
 	/*Comment!:read mode switch */
 	Local_u8SwitchResult = APP_u8ReadSwitch(APP_u8ModeSwitch);
 
-	} while (Local_u8SwitchResult != TACTILE_u8SWITCHPRESSED);
 
-    /*Comment!:go to APP_STOP_WATCH_STANDBY state */
-    return APP_STOP_WATCH_STANDBY;
+	if (Local_u8SwitchResult == TACTILE_u8SWITCHPRESSED)
+
+		    {
+
+	    /*Comment!:if pressed go to APP_STOP_WATCH_STANDBY mode*/
+		    Local_u8ReturnCase = APP_STOP_WATCH_STANDBY;
+
+		    }
+
+		else
+		    {
+
+		    /*Comment!:read Start_StopWatch */
+		    Local_u8SwitchResult = APP_u8ReadSwitch(APP_u8Start_StopWatch);
+
+		    /*Comment!:if pressed go to APP_EDIT_TIME mode*/
+		    if (Local_u8SwitchResult == TACTILE_u8SWITCHPRESSED)
+
+			{
+
+			Local_u8ReturnCase = APP_EDIT_TIME;
+
+			}
+		    else
+			{
+			}
+
+		    }
+
+
+	} while (Local_u8ReturnCase == APP_TIMER);
+
+    /*Comment!:go to new state */
+    return Local_u8ReturnCase;
 
     }
 
