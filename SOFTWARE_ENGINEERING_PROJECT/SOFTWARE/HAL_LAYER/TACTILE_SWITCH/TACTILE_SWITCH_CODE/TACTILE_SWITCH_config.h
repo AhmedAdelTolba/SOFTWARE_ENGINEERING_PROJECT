@@ -12,16 +12,9 @@
 
 #endif /* TACTILE_SWITCH_CONFIG_H_ */
 
-/*Comment: this diver supports only 16 switches*/
+/*Comment: this diver supports only 8 switches*/
 
-/***************************************************************************/
-/* Comment!: number of used switches*/
-/* Range!: 1~16 */
 #define TACTILE_u8SWITCHNUMBER 3
-
-/***************************************************************************/
-/* Comment!: switch connection type*/
-/* Range!: TACTILE_u8ACTIVEHIGH ~ TACTILE_u8ACTIVELOW */
 
 #define TACTILE_u8SWITCH1TYPE TACTILE_u8ACTIVEHIGH
 #define TACTILE_u8SWITCH2TYPE TACTILE_u8ACTIVEHIGH
@@ -42,11 +35,6 @@
 #define TACTILE_u8SWITCH15TYPE TACTILE_u8ACTIVEHIGH
 #define TACTILE_u8SWITCH16TYPE TACTILE_u8ACTIVEHIGH
 
-
-
-/***************************************************************************/
-/* Comment!: Data pins connected to switches*/
-/* Range!: DIO_u8PIN0 ~ DIO_u8PIN31 */
 
 #define TACTILE_u8SWITCH1PIN DIO_u8PIN0
 #define TACTILE_u8SWITCH2PIN DIO_u8PIN1
