@@ -2,7 +2,7 @@
  * DIO_config.h
 
  *
- *  Created on: ??þ/??þ/????
+ *  Created on: ??ï¿½/??ï¿½/????
  *      Author: G
  */
 
@@ -10,7 +10,7 @@
 #define _DIO_CONFIG_H_
 
 /***************************************************************************/
-/*comment!: PIN intial direction*/
+/*comment!: PIN initial direction*/
 /*Range! : DIO_u8HIGH ~ DIO_U8OUTPUT */
 /*comment!: PIN INITDIR index values*/
 /***************************************/
