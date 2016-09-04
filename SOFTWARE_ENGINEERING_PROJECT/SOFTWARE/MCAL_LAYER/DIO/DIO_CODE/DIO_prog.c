@@ -2,7 +2,7 @@
  * DIO_prog.c
 
  *
- *  Created on: ??þ/??þ/????
+ *  Created on: ??ï¿½/??ï¿½/????
  *      Author: G
  */
 /*********************************************************************/
@@ -53,7 +53,7 @@ DIO_u8MASKCLRPIN4, DIO_u8MASKCLRPIN5, DIO_u8MASKCLRPIN6, DIO_u8MASKCLRPIN7 };
 
 /*comment!:initialize function*/
 extern void DIO_VoidInit(void) {
-	/*comment!:set the direction(input(0) or output(1)) of each port with the intial values of each pin  in the DIO_configration.h*/
+	/*comment!:set the direction(input(0) or output(1)) of each port with the initial values of each pin  in the DIO_configration.h*/
 	*DIO_u8DDRA = DIO_u8PortADir;
 	*DIO_u8DDRB = DIO_u8PortBDir;
 	*DIO_u8DDRC = DIO_u8PortCDir;
